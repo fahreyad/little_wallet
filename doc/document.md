@@ -1,0 +1,55 @@
+15000+11000+4000+6000+9000+5000+5000+2500+5000+12500+25000 = 100000 Garments
+20000+2500+11000+13000+1000+5000= 52500 coconut
+20000+2000 = 22000 banana
+10000+10000 = 20000 bobin
+31000 = Supari
+60000+20000+20000+10000+40000 = 150000 mango
+20000 = Fruit
+profit February 26
+Cocunut - 2000+2425+3085+4075
+Supari - 2700+2800+2800
+Garments - 3000+2000+2500(5500)
+Uber - 150
+Banana-200+200+200+200
+28335
+Profit march 26
+Cocunut - 3975(7950)+1910
+Supari - 2700(6000)+
+Garments - 4500(9500)+4590(9850)+4520(9850)
+Uber -
+Banana-200+200+200+200+200+200+200+200+200+200+200+200+200+200+1200 250+250+250+250 total
+2000
+26195
+Profit April 26
+Banana - 250+250+250+250+250+250+250+250+250+250+250+250+250+200+200+200+200+200+200
+Cocunut - 2000+2200+2200
+Boblin - 1500+3750+1750+1750
+Garments -2300(5000)
+22500
+Profit may 26
+Boblin- 1750(415)+1750(400)
+Banana - 200+200+200+200+200+200+200+200+200+200+200
+Piyaj - 600+1400+1400+
+Garments - 2300(5000)+
+Cocunut - 2200+
+Lithu - 900+
+Mosola - 900+
+Khasi- 2400(4000)
+19600
+June 26
+Garments - 2200(4000)
+Mango - 2400(4000)+2400(4000)+2400(4000)+3000(5000)+(5500)+(2500)+3000(5000)+3000(5000)
+Banana - 200+200+200+200+200+200+200+200
+20000
+July 26
+Supari - 3000(5000)
+Banana - 200+200+200+200+200+100+200+200+300+300+400+200+200+200+400+
+Mango - 3000(5000)+3600(6000)+3600(6000)
+Extra - 500(800)+300(500)
+Garments - 2800(4800)
+
+i need a application
+my need
+
+1. i can addd the income sourse
+2. i can add the profit amount + total profit amount and i can check each month profit and report generate the admin and api in laravel which i can up on shere hosting and use the api

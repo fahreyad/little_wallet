@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: income-tracker-app
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    volumes:
+      - .:/var/www/html
+      - ./database/database.sqlite:/var/www/html/database/database.sqlite
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8082
+      DB_CONNECTION: sqlite
+    networks:
+      - income-tracker-network
+
+networks:
+  income-tracker-network:
+    driver: bridge
