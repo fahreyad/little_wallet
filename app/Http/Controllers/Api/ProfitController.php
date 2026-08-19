@@ -14,7 +14,7 @@ class ProfitController extends Controller
         $query = Profit::with('incomeSource')->latest();
 
         if ($request->has('month')) {
-            $query->whereRaw('strftime("%Y-%m", date) = ?', [$request->input('month')]);
+            $query->whereRaw('DATE_FORMAT(date, "%Y-%m") = ?', [$request->input('month')]);
         }
 
         if ($request->has('date')) {

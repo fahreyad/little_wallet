@@ -13,8 +13,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'user']);
 
-    Route::apiResource('income-sources', IncomeSourceController::class);
-    Route::apiResource('profits', ProfitController::class);
+    Route::name('api.')->group(function () {
+        Route::apiResource('income-sources', IncomeSourceController::class);
+        Route::apiResource('profits', ProfitController::class);
+    });
 
     Route::get('/reports/monthly', [ReportController::class, 'monthly']);
     Route::get('/reports/monthly/{month}', [ReportController::class, 'monthlyDetail']);

@@ -24,7 +24,7 @@ class DashboardController extends Controller
             ->limit(10)
             ->get();
 
-        $monthlyChart = Profit::selectRaw('strftime("%Y-%m", date) as month_label, sum(amount) as total')
+        $monthlyChart = Profit::selectRaw('DATE_FORMAT(date, "%Y-%m") as month_label, sum(amount) as total')
             ->groupBy('month_label')
             ->orderBy('month_label', 'desc')
             ->limit(12)

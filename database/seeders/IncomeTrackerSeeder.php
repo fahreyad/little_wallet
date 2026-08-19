@@ -230,6 +230,21 @@ class IncomeTrackerSeeder extends Seeder
                     ['source' => 'Garments', 'amount' => 2800, 'total_amount' => 4800],
                 ],
             ],
+            '2026-08-26' => [
+                'target_total' => null,
+                'entries' => [
+                    ['source' => 'Fruit', 'amount' => 720, 'total_amount' => 1200],
+                    ['source' => 'Fruit', 'amount' => 720, 'total_amount' => 1200],
+                    ['source' => 'Fruit', 'amount' => 700, 'total_amount' => 1200],
+                    ['source' => 'Garments', 'amount' => 2880, 'total_amount' => 4800],
+                    ['source' => 'Banana', 'amount' => 400],
+                    ['source' => 'Banana', 'amount' => 200],
+                    ['source' => 'Banana', 'amount' => 200],
+                    ['source' => 'Banana', 'amount' => 200],
+                    ['source' => 'Banana', 'amount' => 200],
+                    ['source' => 'Banana', 'amount' => 200],
+                ],
+            ],
         ];
     }
 }

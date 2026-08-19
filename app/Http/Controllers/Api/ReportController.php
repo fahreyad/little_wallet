@@ -14,7 +14,7 @@ class ReportController extends Controller
         $month = $request->input('month', now()->format('Y-m'));
 
         $profits = Profit::with('incomeSource')
-            ->whereRaw('strftime("%Y-%m", date) = ?', [$month])
+            ->whereRaw('DATE_FORMAT(date, "%Y-%m") = ?', [$month])
             ->get();
 
         return response()->json([
@@ -28,7 +28,7 @@ class ReportController extends Controller
     public function monthlyDetail(string $month): JsonResponse
     {
         $profits = Profit::with('incomeSource')
-            ->whereRaw('strftime("%Y-%m", date) = ?', [$month])
+            ->whereRaw('DATE_FORMAT(date, "%Y-%m") = ?', [$month])
             ->get();
 
         return response()->json([
@@ -43,7 +43,7 @@ class ReportController extends Controller
     {
         $year = $request->input('year', now()->year);
 
-        $monthly = Profit::selectRaw('strftime("%Y-%m", date) as month, sum(amount) as total_amount, sum(total_amount) as total_profit, count(*) as records')
+        $monthly = Profit::selectRaw('DATE_FORMAT(date, "%Y-%m") as month, sum(amount) as total_amount, sum(total_amount) as total_profit, count(*) as records')
             ->whereYear('date', $year)
             ->groupBy('month')
             ->orderBy('month', 'desc')

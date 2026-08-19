@@ -13,13 +13,13 @@ class ReportController extends Controller
     {
         $year = $request->input('year', now()->year);
 
-        $monthlyReports = Profit::selectRaw('strftime("%Y-%m", date) as month, sum(amount) as amount, sum(total_amount) as total_amount, count(*) as records')
+        $monthlyReports = Profit::selectRaw('DATE_FORMAT(date, "%Y-%m") as month, sum(amount) as amount, sum(total_amount) as total_amount, count(*) as records')
             ->whereYear('date', $year)
             ->groupBy('month')
             ->orderBy('month', 'desc')
             ->get();
 
-        $years = Profit::selectRaw('strftime("%Y", date) as year')
+        $years = Profit::selectRaw('YEAR(date) as year')
             ->groupBy('year')
             ->orderBy('year', 'desc')
             ->pluck('year')
@@ -41,7 +41,7 @@ class ReportController extends Controller
     public function monthly(string $month): View
     {
         $profits = Profit::with('incomeSource')
-            ->whereRaw('strftime("%Y-%m", date) = ?', [$month])
+            ->whereRaw('DATE_FORMAT(date, "%Y-%m") = ?', [$month])
             ->orderBy('amount', 'desc')
             ->get();
 

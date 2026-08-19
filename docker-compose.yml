@@ -11,15 +11,14 @@ services:
       - "8082:80"
     volumes:
       - .:/var/www/html
-      - ./database/database.sqlite:/var/www/html/database/database.sqlite
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
       APP_URL: http://localhost:8082
-      DB_CONNECTION: sqlite
+      DB_CONNECTION: mysql
     networks:
-      - income-tracker-network
+      - common-net
 
 networks:
-  income-tracker-network:
-    driver: bridge
+  common-net:
+    external: true

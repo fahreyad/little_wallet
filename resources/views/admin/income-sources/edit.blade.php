@@ -1,20 +1,28 @@
 @extends('layouts.app')
 
 @section('title', 'Edit Income Source')
+@section('page-title', 'Edit Income Source')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h2">Edit Income Source</h1>
-    <a href="{{ route('income-sources.index') }}" class="btn btn-secondary">Back</a>
+    <div>
+        <a href="{{ route('income-sources.index') }}" class="text-decoration-none text-secondary small"><i class="bi bi-arrow-left"></i> Back to sources</a>
+        <h1 class="h3 fw-bold mt-1 mb-0">Edit Income Source</h1>
+    </div>
 </div>
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body p-4 p-md-5">
         <form method="POST" action="{{ route('income-sources.update', $incomeSource) }}">
             @csrf
             @method('PUT')
             @include('admin.income-sources.form')
-            <button type="submit" class="btn btn-primary">Update</button>
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary btn-icon">
+                    <i class="bi bi-check-lg"></i> Update Source
+                </button>
+                <a href="{{ route('income-sources.index') }}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
         </form>
     </div>
 </div>
