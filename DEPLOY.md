@@ -6,7 +6,6 @@ This guide is for deploying the **Income Tracker** Laravel application on a shar
 
 ## What is included
 
-- `little_wallet_seed.sql` — ready-to-import MySQL database dump (tables + all data through August 2026)
 - `vendor/` — Composer dependencies (included because most shared hosts do not have Composer CLI)
 - `public/.htaccess` — Laravel rewrite rules
 - Root `.htaccess` — redirects all traffic to `public/`

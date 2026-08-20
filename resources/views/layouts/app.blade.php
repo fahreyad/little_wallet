@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', config('app.name'))</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+    <meta name="theme-color" content="#0d6efd">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" href="{{ asset('icons/icon-192.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('icons/apple-touch-icon.png') }}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
@@ -290,6 +302,10 @@
             <header class="app-header">
                 <h1 class="page-title">@yield('page-title', '')</h1>
                 <div class="user-menu">
+                    <button type="button" class="btn btn-sm btn-primary btn-icon d-none" id="installAppBtn">
+                        <i class="bi bi-download"></i>
+                        <span class="d-none d-sm-inline">Install App</span>
+                    </button>
                     <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                         <i class="bi bi-moon-stars-fill dark-icon"></i>
                         <i class="bi bi-sun-fill light-icon"></i>
@@ -387,6 +403,44 @@
                     localStorage.setItem('theme', next);
                 });
             }
+        })();
+    </script>
+    <script>
+        // Register the service worker for offline app-shell support and installability.
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('{{ asset("sw.js") }}').catch(function () {
+                    // Non-fatal: the app still works without the service worker.
+                });
+            });
+        }
+
+        // "Install App" button, shown only when the browser offers the native install prompt.
+        (function () {
+            var installBtn = document.getElementById('installAppBtn');
+            var deferredPrompt = null;
+
+            window.addEventListener('beforeinstallprompt', function (event) {
+                event.preventDefault();
+                deferredPrompt = event;
+                if (installBtn) installBtn.classList.remove('d-none');
+            });
+
+            if (installBtn) {
+                installBtn.addEventListener('click', function () {
+                    if (!deferredPrompt) return;
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.finally(function () {
+                        deferredPrompt = null;
+                        installBtn.classList.add('d-none');
+                    });
+                });
+            }
+
+            window.addEventListener('appinstalled', function () {
+                if (installBtn) installBtn.classList.add('d-none');
+                deferredPrompt = null;
+            });
         })();
     </script>
     @stack('scripts')
