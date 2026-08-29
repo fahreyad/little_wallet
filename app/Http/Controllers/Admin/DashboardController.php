@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\IncomeSource;
 use App\Models\Profit;
 use Carbon\Carbon;
 use Illuminate\View\View;
@@ -23,6 +24,10 @@ class DashboardController extends Controller
 
         $totalProfit = Profit::sum('amount');
 
+        $incomeSourceTotal = IncomeSource::count();
+
+        $totalInvestedAmount = IncomeSource::sum('investment_amount');
+
         $recentProfits = Profit::with('incomeSource')
             ->latest()
             ->limit(10)
@@ -39,6 +44,8 @@ class DashboardController extends Controller
             'monthlyProfit',
             'monthlyTotalAmount',
             'totalProfit',
+            'incomeSourceTotal',
+            'totalInvestedAmount',
             'recentProfits',
             'monthlyChart'
         ));

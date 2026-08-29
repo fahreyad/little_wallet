@@ -65,6 +65,36 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="card stat-card text-bg-secondary h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="card-title">Total Income Sources</h5>
+                        <p class="card-text display-6">{{ $incomeSourceTotal }}</p>
+                    </div>
+                    <div class="bg-white bg-opacity-25 rounded-3 p-2">
+                        <i class="bi bi-diagram-3 fs-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card text-bg-dark h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="card-title">Total Invested Amount</h5>
+                        <p class="card-text display-6">{{ number_format($totalInvestedAmount, 2) }}</p>
+                    </div>
+                    <div class="bg-white bg-opacity-25 rounded-3 p-2">
+                        <i class="bi bi-cash-coin fs-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row g-4">
