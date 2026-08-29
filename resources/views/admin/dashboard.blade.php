@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="row g-4 mb-4">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card stat-card text-bg-primary h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start">
@@ -20,13 +20,13 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card stat-card text-bg-success h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
-                        <h5 class="card-title">Total Profit</h5>
-                        <p class="card-text display-6">{{ number_format($totalProfit, 2) }}</p>
+                        <h5 class="card-title">This Month Total Amount</h5>
+                        <p class="card-text display-6">{{ number_format($monthlyTotalAmount, 2) }}</p>
                     </div>
                     <div class="bg-white bg-opacity-25 rounded-3 p-2">
                         <i class="bi bi-cash-stack fs-4"></i>
@@ -35,7 +35,22 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <div class="card stat-card text-bg-warning h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="card-title">Total Profit</h5>
+                        <p class="card-text display-6">{{ number_format($totalProfit, 2) }}</p>
+                    </div>
+                    <div class="bg-white bg-opacity-25 rounded-3 p-2">
+                        <i class="bi bi-piggy-bank fs-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
         <div class="card stat-card text-bg-info h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start">
@@ -116,6 +131,20 @@
                     pointHoverRadius: 6,
                     fill: true,
                     tension: 0.4
+                },
+                {
+                    label: 'Total Amount',
+                    data: {!! json_encode($monthlyChart->pluck('total_amount')) !!},
+                    borderColor: '#198754',
+                    backgroundColor: 'rgba(25, 135, 84, 0.15)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#198754',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    fill: true,
+                    tension: 0.4
                 }]
             },
             options: {
@@ -123,7 +152,13 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: false
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: textColor,
+                            usePointStyle: true,
+                            padding: 20
+                        }
                     },
                     tooltip: {
                         backgroundColor: isDark ? '#212529' : '#fff',
@@ -134,7 +169,7 @@
                         padding: 12,
                         callbacks: {
                             label: function(context) {
-                                return 'Profit: ' + Number(context.parsed.y).toFixed(2);
+                                return context.dataset.label + ': ' + Number(context.parsed.y).toFixed(2);
                             }
                         }
                     }

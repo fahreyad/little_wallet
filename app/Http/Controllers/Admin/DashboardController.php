@@ -17,6 +17,10 @@ class DashboardController extends Controller
             ->whereYear('date', $currentMonth->year)
             ->sum('amount');
 
+        $monthlyTotalAmount = Profit::whereMonth('date', $currentMonth->month)
+            ->whereYear('date', $currentMonth->year)
+            ->sum('total_amount');
+
         $totalProfit = Profit::sum('amount');
 
         $recentProfits = Profit::with('incomeSource')
@@ -24,7 +28,7 @@ class DashboardController extends Controller
             ->limit(10)
             ->get();
 
-        $monthlyChart = Profit::selectRaw('DATE_FORMAT(date, "%Y-%m") as month_label, sum(amount) as total')
+        $monthlyChart = Profit::selectRaw('DATE_FORMAT(date, "%Y-%m") as month_label, sum(amount) as total, sum(total_amount) as total_amount')
             ->groupBy('month_label')
             ->orderBy('month_label', 'desc')
             ->limit(12)
@@ -33,6 +37,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact(
             'monthlyProfit',
+            'monthlyTotalAmount',
             'totalProfit',
             'recentProfits',
             'monthlyChart'
